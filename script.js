@@ -1,60 +1,64 @@
-// it makes a favourites meal array if its not exist in local storage
+// Check if the favorites meal array exists in local storage, create if not
 if (localStorage.getItem("favouritesList") == null) {
     localStorage.setItem("favouritesList", JSON.stringify([]));
 }
 
-// it fetches meals from api and return it
-async function fetchMealsFromApi(url,value) {
-    const response=await fetch(`${url+value}`);
-    const meals=await response.json();
+// Function to fetch meals from the API and return them
+async function fetchMealsFromApi(url, value) {
+    const response = await fetch(`${url + value}`);
+    const meals = await response.json();
     return meals;
 }
 
-// it show's all meals card in main acording to search input value
-function showMealList(){
+// Function to display all meal cards in the main section based on the search input value
+function showMealList() {
     let inputValue = document.getElementById("my-search").value;
-    let arr=JSON.parse(localStorage.getItem("favouritesList"));
-    let url="https://www.themealdb.com/api/json/v1/1/search.php?s=";
+    let arr = JSON.parse(localStorage.getItem("favouritesList"));
+    let url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
     let html = "";
-    let meals=fetchMealsFromApi(url,inputValue);
-    meals.then(data=>{
+    let meals = fetchMealsFromApi(url, inputValue);
+
+    meals.then(data => {
         if (data.meals) {
             data.meals.forEach((element) => {
-                let isFav=false;
+                let isFav = false;
                 for (let index = 0; index < arr.length; index++) {
-                    if(arr[index]==element.idMeal){
-                        isFav=true;
+                    if (arr[index] == element.idMeal) {
+                        isFav = true;
                     }
                 }
                 if (isFav) {
+                    // Display a card for a favorite meal
                     html += `
-                <div id="card" class="card mb-3" style="width: 20rem;">
-                    <img src="${element.strMealThumb}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">${element.strMeal}</h5>
-                        <div class="d-flex justify-content-between mt-5">
-                            <button type="button" class="btn btn-outline-light" onclick="showMealDetails(${element.idMeal})">View Details</button>
-                            <button id="main${element.idMeal}" class="btn btn-outline-light active" onclick="addRemoveToFavList(${element.idMeal})" style="border-radius:50%"><i class="fa-solid fa-heart"></i></button>
+                    <div id="card" class="card mb-3" style="width: 20rem;">
+                        <img src="${element.strMealThumb}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${element.strMeal}</h5>
+                            <div class="d-flex justify-content-between mt-5">
+                                <button type="button" class="btn btn-outline-light" onclick="showMealDetails(${element.idMeal})">View Details</button>
+                                <button id="main${element.idMeal}" class="btn btn-outline-light active" onclick="addRemoveToFavList(${element.idMeal})" style="border-radius:50%"><i class="fa-solid fa-heart"></i></button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                `;
+                    `;
                 } else {
+                    // Display a card for a non-favorite meal
                     html += `
-                <div id="card" class="card mb-3" style="width: 20rem;">
-                    <img src="${element.strMealThumb}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">${element.strMeal}</h5>
-                        <div class="d-flex justify-content-between mt-5">
-                            <button type="button" class="btn btn-outline-light" onclick="showMealDetails(${element.idMeal})">View Details</button>
-                            <button id="main${element.idMeal}" class="btn btn-outline-light" onclick="addRemoveToFavList(${element.idMeal})" style="border-radius:50%"><i class="fa-solid fa-heart"></i></button>
+                    <div id="card" class="card mb-3" style="width: 20rem;">
+                        <img src="${element.strMealThumb}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">${element.strMeal}</h5>
+                            <div class="d-flex justify-content-between mt-5">
+                                <button type="button" class="btn btn-outline-light" onclick="showMealDetails(${element.idMeal})">View Details</button>
+                                <button id="main${element.idMeal}" class="btn btn-outline-light" onclick="addRemoveToFavList(${element.idMeal})" style="border-radius:50%"><i class="fa-solid fa-heart"></i></button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                `;
-                }  
+                    `;
+                }
             });
         } else {
+            // No meals found
             html += `
             <div class="page-wrap d-flex flex-row align-items-center">
                 <div class="container">
@@ -62,7 +66,7 @@ function showMealList(){
                         <div class="col-md-12 text-center">
                             <span class="display-1 d-block">Error</span>
                             <div class="mb-4 lead">
-                                The delicious meal you were looking was not found!!.
+                                The delicious meal you were looking for was not found.
                             </div>
                         </div>
                     </div>
@@ -74,11 +78,11 @@ function showMealList(){
     });
 }
 
-//it  shows full meal details in main
+// Function to show full meal details in the main section
 async function showMealDetails(id) {
-    let url="https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
-    let html="";
-    await fetchMealsFromApi(url,id).then(data=>{
+    let url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
+    let html = "";
+    await fetchMealsFromApi(url, id).then(data => {
         html += `
           <div id="meal-details" class="mb-5">
             <div id="meal-header" class="d-flex justify-content-around flex-wrap">
@@ -101,15 +105,16 @@ async function showMealDetails(id) {
           </div>
         `;
     });
-    document.getElementById("main").innerHTML=html;
+    document.getElementById("main").innerHTML = html;
 }
 
-// it shows all favourites meals in favourites body
+// Function to display all favorite meals in the favorites body
 async function showFavMealList() {
-    let arr=JSON.parse(localStorage.getItem("favouritesList"));
-    let url="https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
-    let html="";
-    if (arr.length==0) {
+    let arr = JSON.parse(localStorage.getItem("favouritesList"));
+    let url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=";
+    let html = "";
+    if (arr.length == 0) {
+        // No favorite meals
         html += `
             <div class="page-wrap d-flex flex-row align-items-center">
                 <div class="container">
@@ -117,7 +122,7 @@ async function showFavMealList() {
                         <div class="col-md-12 text-center">
                             <span class="display-1 d-block">Error</span>
                             <div class="mb-4 lead">
-                                There is no delicious meal in your fav list.
+                                There are no delicious meals in your favorites list.
                             </div>
                         </div>
                     </div>
@@ -126,7 +131,7 @@ async function showFavMealList() {
             `;
     } else {
         for (let index = 0; index < arr.length; index++) {
-            await fetchMealsFromApi(url,arr[index]).then(data=>{
+            await fetchMealsFromApi(url, arr[index]).then(data => {
                 html += `
                 <div id="card" class="card mb-3" style="width: 20rem;">
                     <img src="${data.meals[0].strMealThumb}" class="card-img-top" alt="...">
@@ -139,30 +144,32 @@ async function showFavMealList() {
                     </div>
                 </div>
                 `;
-            });   
+            });
         }
     }
-    document.getElementById("favourites-body").innerHTML=html;
+    document.getElementById("favourites-body").innerHTML = html;
 }
 
-//it adds and remove meals to favourites list
+// Function to add or remove meals from the favorites list
 function addRemoveToFavList(id) {
-    let arr=JSON.parse(localStorage.getItem("favouritesList"));
-    let contain=false;
+    let arr = JSON.parse(localStorage.getItem("favouritesList"));
+    let contain = false;
     for (let index = 0; index < arr.length; index++) {
-        if (id==arr[index]) {
-            contain=true;
+        if (id == arr[index]) {
+            contain = true;
         }
     }
     if (contain) {
+        // Remove the meal from favorites
         let number = arr.indexOf(id);
         arr.splice(number, 1);
-        alert("This delicious meal was removed from your fav list!!");
+        alert("This delicious meal was removed from your favorites list!!");
     } else {
+        // Add the meal to favorites
         arr.push(id);
-        alert("This Delicious meal is in your fav list!!");
+        alert("This Delicious meal is in your favorites list!!");
     }
-    localStorage.setItem("favouritesList",JSON.stringify(arr));
+    localStorage.setItem("favouritesList", JSON.stringify(arr));
     showMealList();
     showFavMealList();
 }

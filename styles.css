@@ -1,3 +1,4 @@
+/* Global Reset Styles */
 * {
     padding: 0;
     margin: 0;
@@ -5,32 +6,38 @@
     font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
+/* Body Styles */
 body {
     width: 100%;
     background-color: rgb(25, 25, 112);
     color: hwb(0 0% 100%);
 }
 
+/* Heading Styles */
 #heading {
     margin-top: 100px;
     color: rgb(0, 0, 0);
     font-size: larger;
 }
 
+/* Form Control Styles */
 .form-control{
     font-size: medium;
 }
 
+/* Logo Styles */
 #logo {
     width: 50px;
     height: 50px; 
     margin-left: -1700px; 
-  }  
+}
 
+/* Navbar Styles */
 #nav {
     background-color: rgb(135, 206, 250);
 }
 
+/* Search Bar Styles */
 #search-bar {
     max-width: 600px;
 }
@@ -39,6 +46,7 @@ body {
     height: 50px;
 }
 
+/* Card Styles */
 #card {
     background-color: hsl(203, 92%, 75%);
     padding: 5px;
@@ -47,6 +55,7 @@ body {
     height: 40%;
 }
 
+/* Meal Details Styles */
 #meal-details{
     width: 100%;
     padding: 10px;
@@ -72,51 +81,52 @@ body {
     font-style: italic;
 }
 
+/* Button Styles */
 .btn-outline-light {
-    /* color: navy; */
-    border: 2px solid black; /* Specify 'solid' for the border style */
+    border: 2px solid black;
     color:black;
     background-color: #d3d3d3;
 }
 
 .btn-outline-light:hover {
-    border-color: navy; /* Change border color on hover */
+    border-color: navy;
     background-color: grey;
     color: darkgreen;
 }
 
+/* Meal Instruction Styles */
 #meal-instruction{
     margin: auto;
     text-align: center;
     color: hwb(0 0% 100%);
 }
 
-/* CSS to make the cards perfect square */
+/* Card Styles within the Offcanvas */
 #favourites-body .card {
-    height: 42%; /* Set a fixed height for the cards */
+    height: 42%;
 }
 
 #favourites-body .card-img-top {
-    height: 200px; /* Set a fixed height for the card images */
-    object-fit: cover; /* Ensure the image covers the entire space */
+    height: 200px;
+    object-fit: cover;
 }
 
 #favourites-body .card-title {
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Add ellipsisto card title if it overflows */
+    text-overflow: ellipsis;
 }
 
-/* Change the background color behind the offcanvas heading */
+/* Offcanvas Styles */
 .offcanvas-header {
-    background-color: rgb(135, 206, 250); 
+    background-color: rgb(135, 206, 250);
 }
 
 .offcanvas-end {
     background-color: #191970;
 }
 
-/* Footer styles */
+/* Footer Styles */
 #footer {
     position: fixed;
     text-align: center;
@@ -127,13 +137,13 @@ body {
     background-color: black;
     color: hwb(0 50% 50%);
     display: flex;
-    align-items: center; /* Vertical center alignment */
-    justify-content: center; /* Horizontal center alignment */
+    align-items: center;
+    justify-content: center;
     padding: 2px 0;
 }
 
+/* Additional Styles (Signature) */
 .signature {
-    /* Additional styles for your signature */
     font-size: 20px;
     font-weight: bold;
 }
