@@ -1,0 +1,139 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+body {
+    width: 100%;
+    background-color: rgb(25, 25, 112);
+    color: hwb(0 0% 100%);
+}
+
+#heading {
+    margin-top: 100px;
+    color: rgb(0, 0, 0);
+    font-size: larger;
+}
+
+.form-control{
+    font-size: medium;
+}
+
+#logo {
+    width: 50px;
+    height: 50px; 
+    margin-left: -1700px; 
+  }  
+
+#nav {
+    background-color: rgb(135, 206, 250);
+}
+
+#search-bar {
+    max-width: 600px;
+}
+
+#search-bar input {
+    height: 50px;
+}
+
+#card {
+    background-color: hsl(203, 92%, 75%);
+    padding: 5px;
+    color: black;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    height: 40%;
+}
+
+#meal-details{
+    width: 100%;
+    padding: 10px;
+    background-color: hwb(203 53% 2%);
+}
+
+#meal-header{
+    width: 70%;
+    margin: auto;
+}
+
+#meal-thumbnail img{
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+}
+
+#details{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+}
+
+.btn-outline-light {
+    /* color: navy; */
+    border: 2px solid black; /* Specify 'solid' for the border style */
+    color:black;
+    background-color: #d3d3d3;
+}
+
+.btn-outline-light:hover {
+    border-color: navy; /* Change border color on hover */
+    background-color: grey;
+    color: darkgreen;
+}
+
+#meal-instruction{
+    margin: auto;
+    text-align: center;
+    color: hwb(0 0% 100%);
+}
+
+/* CSS to make the cards perfect square */
+#favourites-body .card {
+    height: 42%; /* Set a fixed height for the cards */
+}
+
+#favourites-body .card-img-top {
+    height: 200px; /* Set a fixed height for the card images */
+    object-fit: cover; /* Ensure the image covers the entire space */
+}
+
+#favourites-body .card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsisto card title if it overflows */
+}
+
+/* Change the background color behind the offcanvas heading */
+.offcanvas-header {
+    background-color: rgb(135, 206, 250); 
+}
+
+.offcanvas-end {
+    background-color: #191970;
+}
+
+/* Footer styles */
+#footer {
+    position: fixed;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: black;
+    color: hwb(0 50% 50%);
+    display: flex;
+    align-items: center; /* Vertical center alignment */
+    justify-content: center; /* Horizontal center alignment */
+    padding: 2px 0;
+}
+
+.signature {
+    /* Additional styles for your signature */
+    font-size: 20px;
+    font-weight: bold;
+}
